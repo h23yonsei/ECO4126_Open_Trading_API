@@ -8,8 +8,6 @@
 2. [인증](#인증)
 3. [[국내주식] 기본시세](#국내주식-기본시세)
 4. [[국내주식] 주문/계좌](#국내주식-주문계좌)
-5. [공통 요청 헤더](#공통-요청-헤더)
-6. [오류 코드 참고](#오류-코드-참고)
 
 ---
 
@@ -26,14 +24,15 @@
 | 변수명 | 설명 | 예시 |
 |---|---|---|
 | `VTS` | 모의투자 API Base URL | `https://openapivts.koreainvestment.com:29443` |
-| `VTS_APPKEY` | 모의투자 앱키 (App Key) | `PSxxxxxxxxxxxxxxxxxxxxxxxx` |
-| `VTS_APPSECRET` | 모의투자 앱 시크릿 (App Secret) | `xxxxxxxx...` |
-| `VTS_TOKEN` | OAuth 액세스 토큰 (자동 발급 또는 수동 입력) | `Bearer eyJ0...` |
-| `VTS_HASH` | HashKey (POST 요청 시 필요) | `xxxxxxxx...` |
-| `CANO` | 모의투자 계좌번호 앞 8자리 | `xxxxxxxx` |
+| `VTS_APPKEY` | 모의투자 앱키 (App Key) | `계정 설정에서 확인` |
+| `VTS_APPSECRET` | 모의투자 앱 시크릿 (App Secret) | `계정 설정에서 확인` |
+| `VTS_TOKEN` | OAuth 액세스 토큰 | `자동 발급` |
+| `VTS_HASH` | HashKey (POST 요청 시 필요) | `자동 발급` |
+| `CANO` | 모의투자 계좌번호 앞 8자리 | `계정 설정에서 확인` |
 | `CANO_T` | 계좌 상품 코드 (Account Product Code) | `01` |
 
-> **보안 주의점:** `VTS_APPSECRET` 및 `VTS_TOKEN`은 Postman의 **Secret** 타입 변수로 저장하여 노출을 방지합니다.
+> **보안 주의점:** `VTS_APPKEY` 및 `VTS_APPSECRET`은 Postman의 **Secret** 타입 변수로 저장하여 노출을 방지합니다.
+> **CANO_T:** `01`은 모의투자 계좌를 의미합니다.
 
 ---
 
@@ -382,51 +381,3 @@ GET {{VTS}}/uapi/domestic-stock/v1/trading/inquire-daily-ccld
 | `CTX_AREA_NK100` | _(페이징)_ | 연속 조회 키 |
 
 ---
-
-## 공통 요청 헤더
-
-모든 API 요청에 아래 헤더가 필요합니다.
-
-```
-Content-Type: application/json; charset=utf-8
-authorization: Bearer {{VTS_TOKEN}}
-appkey: {{VTS_APPKEY}}
-appsecret: {{VTS_APPSECRET}}
-tr_id: <각 API별 tr_id>
-custtype: P
-```
-
-| 헤더 | 설명 |
-|---|---|
-| `authorization` | `Bearer {{VTS_TOKEN}}` 형식의 OAuth 토큰 |
-| `appkey` | 모의투자 앱키 |
-| `appsecret` | 모의투자 앱 시크릿 |
-| `tr_id` | 거래 ID (각 API 문서 참조) |
-| `custtype` | 고객 유형 (`P`: 개인, `B`: 법인) |
-
-> POST 요청의 경우 `hashkey: {{VTS_HASH}}` 헤더도 추가해야 합니다.
-
----
-
-## 오류 코드 참고
-
-| HTTP 상태 코드 | 설명 | 조치 방법 |
-|---|---|---|
-| `200` | 성공 | — |
-| `400` | 잘못된 요청 (파라미터 오류) | 요청 파라미터 확인 |
-| `401` | 인증 실패 | `VTS_TOKEN` 재발급 |
-| `403` | 권한 없음 | 앱키 및 계좌 권한 확인 |
-| `500` | 서버 오류 | 잠시 후 재시도 |
-
-응답 본문의 `rt_cd` 필드가 `"0"`이면 성공, 그 외는 `msg_cd` 및 `msg1` 필드를 통해 오류 내용을 확인하세요.
-
-```json
-{
-  "rt_cd": "0",
-  "msg_cd": "MAPIKEY0000",
-  "msg1": "정상처리 되었습니다."
-}
-```
-
-- 샘플 코드를 활용하여 제작한 고객님의 프로그램으로 인한 손해에 대해서는 당사에서 책임지지 않습니다.
-
