@@ -1,5 +1,4 @@
-# 한국투자증권 Open Trading API 및,
-# Postman API 플랫폼을 사용한 국내주식 모의투자 
+# 한국투자증권 Open Trading API 및 Postman API 플랫폼을 사용한 국내주식 모의투자
 
 ---
 
