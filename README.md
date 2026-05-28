@@ -32,6 +32,7 @@
 | `CANO_T` | 계좌 상품 코드 (Account Product Code) | `01` |
 
 > **보안 주의점:** `VTS_APPKEY` 및 `VTS_APPSECRET`은 Postman의 **Secret** 타입 변수로 저장하여 노출을 방지합니다.
+
 > **CANO_T:** `01`은 모의투자 계좌를 의미합니다.
 
 ---
