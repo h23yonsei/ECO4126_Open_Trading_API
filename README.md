@@ -4,20 +4,20 @@
 
 ## 목차
 
-1. [사전 준비](#사전-준비)
-2. [인증](#인증)
-3. [[국내주식] 기본시세](#국내주식-기본시세)
-4. [[국내주식] 주문/계좌](#국내주식-주문계좌)
+1. [사전 준비](#1-사전-준비)
+2. [인증](#2-인증)
+3. [국내주식 기본시세](#3-국내주식-기본시세)
+4. [국내주식 주문/계좌](#4-국내주식-주문계좌)
 
 ---
 
 ## 1. 사전 준비
 
-### a. 한국투자증권 Open API 신청
+### 1.1. 한국투자증권 Open API 신청
 
 [한국투자증권 Open API 포털](https://apiportal.koreainvestment.com)에서 모의투자 앱 키를 발급받습니다.
 
-### b. Postman 환경 변수 설정
+### 1.2. Postman 환경 변수 설정
 
 컬렉션 실행 전, `모의Env` 환경에서 아래 변수들을 설정합니다.
 
@@ -41,7 +41,7 @@
 
 국내주식 API를 호출하기 전에 **OAuth 토큰을 먼저 발급**받습니다.
 
-### 토큰 발급 절차
+### 2.1. 토큰 발급 절차
 
 1. 컬렉션 내 **[OAuth]** 폴더의 토큰 발급 요청을 실행
 2. 발급된 `access_token`이 `VTS_TOKEN` 환경 변수에 자동으로 저장
@@ -60,19 +60,19 @@ Content-Type: application/json
 
 > 토큰 유효 기간은 **24시간**으로, 만료 시 재발급이 필요합니다.
 
-### HashKey 발급 (POST 요청 시 필요)
+### 2.2. HashKey 발급 (POST 요청 시 필요)
 
 주문 API 등 POST 요청을 사용할 때는 `VTS_HASH` 값도 필요하기 때문에,
 **[OAuth]** 폴더의 HashKey 발급 요청을 실행하여 `VTS_HASH`를 설정합니다.
 
 ---
 
-## [국내주식] 기본시세
+## 3. 국내주식 기본시세
 
 주식 현재가, 체결 내역, 호가, 투자자 동향 등 다양한 시세 데이터를 조회하는 API 모음입니다.  
 모든 요청은 `GET` 방식이며, `{{VTS}}`를 Base URL로 사용합니다.
 
-### 공통 Query Parameter
+### 3.1. 공통 Query Parameter
 
 | 파라미터 | 설명 | 예시 |
 |---|---|---|
@@ -81,7 +81,7 @@ Content-Type: application/json
 
 ---
 
-### API 목록
+### 3.2. API 목록
 
 | # | 요청 이름 | Method | Endpoint | 설명 |
 |---|---|---|---|---|
@@ -101,9 +101,9 @@ Content-Type: application/json
 
 ---
 
-### 상세 설명
+### 3.3. 상세 설명
 
-#### 1. V_주식현재가 시세
+#### 3.3.1. V_주식현재가 시세
 ```
 GET {{VTS}}/uapi/domestic-stock/v1/quotations/inquire-price
 ```
@@ -117,7 +117,7 @@ GET {{VTS}}/uapi/domestic-stock/v1/quotations/inquire-price
 
 ---
 
-#### 2. V_주식현재가 체결(최근30건)
+#### 3.3.2. V_주식현재가 체결(최근30건)
 ```
 GET {{VTS}}/uapi/domestic-stock/v1/quotations/inquire-ccnl
 ```
@@ -125,7 +125,7 @@ GET {{VTS}}/uapi/domestic-stock/v1/quotations/inquire-ccnl
 
 ---
 
-#### 3. V_주식현재가 일자별
+#### 3.3.3. V_주식현재가 일자별
 ```
 GET {{VTS}}/uapi/domestic-stock/v1/quotations/inquire-daily-price
 ```
@@ -139,7 +139,7 @@ GET {{VTS}}/uapi/domestic-stock/v1/quotations/inquire-daily-price
 
 ---
 
-#### 4. V_주식현재가 호가 예상체결
+#### 3.3.4. V_주식현재가 호가 예상체결
 ```
 GET {{VTS}}/uapi/domestic-stock/v1/quotations/inquire-asking-price-exp-ccn
 ```
@@ -147,7 +147,7 @@ GET {{VTS}}/uapi/domestic-stock/v1/quotations/inquire-asking-price-exp-ccn
 
 ---
 
-#### 5. V_주식현재가 투자자
+#### 3.3.5. V_주식현재가 투자자
 ```
 GET {{VTS}}/uapi/domestic-stock/v1/quotations/inquire-investor
 ```
@@ -155,7 +155,7 @@ GET {{VTS}}/uapi/domestic-stock/v1/quotations/inquire-investor
 
 ---
 
-#### 6. V_주식현재가 회원사
+#### 3.3.6. V_주식현재가 회원사
 ```
 GET {{VTS}}/uapi/domestic-stock/v1/quotations/inquire-member
 ```
@@ -163,7 +163,7 @@ GET {{VTS}}/uapi/domestic-stock/v1/quotations/inquire-member
 
 ---
 
-#### 7. V_주식현재가 당일시간대별체결
+#### 3.3.7. V_주식현재가 당일시간대별체결
 ```
 GET {{VTS}}/uapi/domestic-stock/v1/quotations/inquire-time-itemconclusion
 ```
@@ -176,7 +176,7 @@ GET {{VTS}}/uapi/domestic-stock/v1/quotations/inquire-time-itemconclusion
 
 ---
 
-#### 8. V_국내주식기간별시세(일/주/월/년)
+#### 3.3.8. V_국내주식기간별시세(일/주/월/년)
 ```
 GET {{VTS}}/uapi/domestic-stock/v1/quotations/inquire-daily-itemchartprice
 ```
@@ -191,7 +191,7 @@ GET {{VTS}}/uapi/domestic-stock/v1/quotations/inquire-daily-itemchartprice
 
 ---
 
-#### 9. V_주식현재가 시간외 일자별주가
+#### 3.3.9. V_주식현재가 시간외 일자별주가
 ```
 GET {{VTS}}/uapi/domestic-stock/v1/quotations/inquire-daily-overtimeprice
 ```
@@ -199,7 +199,7 @@ GET {{VTS}}/uapi/domestic-stock/v1/quotations/inquire-daily-overtimeprice
 
 ---
 
-#### 10. V_주식현재가 시간외 시간별체결
+#### 3.3.10. V_주식현재가 시간외 시간별체결
 ```
 GET {{VTS}}/uapi/domestic-stock/v1/quotations/inquire-time-overtimeconclusion
 ```
@@ -207,7 +207,7 @@ GET {{VTS}}/uapi/domestic-stock/v1/quotations/inquire-time-overtimeconclusion
 
 ---
 
-#### 11. V_국내주식업종기간별시세(일/주/월/년)
+#### 3.3.11. V_국내주식업종기간별시세(일/주/월/년)
 ```
 GET {{VTS}}/uapi/domestic-stock/v1/quotations/inquire-daily-indexchartprice
 ```
@@ -221,7 +221,7 @@ KOSPI, KOSDAQ 등 업종 지수의 기간별 시세를 조회합니다.
 
 ---
 
-#### 12. V_주식당일분봉조회
+#### 3.3.12. V_주식당일분봉조회
 ```
 GET {{VTS}}/uapi/domestic-stock/v1/quotations/inquire-time-itemchartprice
 ```
@@ -229,7 +229,7 @@ GET {{VTS}}/uapi/domestic-stock/v1/quotations/inquire-time-itemchartprice
 
 ---
 
-#### 13. V_주식현재가 ELW현재가 시세
+#### 3.3.13. V_주식현재가 ELW현재가 시세
 ```
 GET {{VTS}}/uapi/domestic-stock/v1/quotations/inquire-elw-price
 ```
@@ -242,12 +242,12 @@ ELW(Equity Linked Warrant) 종목의 현재가 시세를 조회합니다.
 
 ---
 
-## [국내주식] 주문/계좌
+## 4. 국내주식 주문/계좌
 
 주식 주문 제출, 정정/취소, 잔고 및 체결 내역 조회 등 계좌 관련 API 모음입니다.  
 **POST 요청**은 `VTS_HASH` 값이 필요하며, 모든 요청에 `VTS_TOKEN` 인증이 필요합니다.
 
-### API 목록
+### 4.1. API 목록
 
 | # | 요청 이름 | Method | Endpoint | 설명 |
 |---|---|---|---|---|
@@ -259,9 +259,9 @@ ELW(Equity Linked Warrant) 종목의 현재가 시세를 조회합니다.
 
 ---
 
-### 상세 설명
+### 4.2. 상세 설명
 
-#### 1. V_주식주문(현금)
+#### 4.2.1. V_주식주문(현금)
 ```
 POST {{VTS}}/uapi/domestic-stock/v1/trading/order-cash
 ```
@@ -292,7 +292,7 @@ POST {{VTS}}/uapi/domestic-stock/v1/trading/order-cash
 
 ---
 
-#### 2. V_주식주문(정정취소)
+#### 4.2.2. V_주식주문(정정취소)
 ```
 POST {{VTS}}/uapi/domestic-stock/v1/trading/order-rvsecncl
 ```
@@ -323,7 +323,7 @@ POST {{VTS}}/uapi/domestic-stock/v1/trading/order-rvsecncl
 
 ---
 
-#### 3. V_매수가능조회
+#### 4.2.3. V_매수가능조회
 ```
 GET {{VTS}}/uapi/domestic-stock/v1/trading/inquire-psbl-order
 ```
@@ -342,7 +342,7 @@ GET {{VTS}}/uapi/domestic-stock/v1/trading/inquire-psbl-order
 
 ---
 
-#### 4. V_주식잔고조회
+#### 4.2.4. V_주식잔고조회
 ```
 GET {{VTS}}/uapi/domestic-stock/v1/trading/inquire-balance
 ```
@@ -362,7 +362,7 @@ GET {{VTS}}/uapi/domestic-stock/v1/trading/inquire-balance
 
 ---
 
-#### 5. V_주식일별주문체결조회
+#### 4.2.5. V_주식일별주문체결조회
 ```
 GET {{VTS}}/uapi/domestic-stock/v1/trading/inquire-daily-ccld
 ```
